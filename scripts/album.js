@@ -30,6 +30,22 @@
      ]
  };
 
+ // Assignment Example Album
+ var albumWaves = {
+     title: 'Oceans',
+     artist: 'Crashing Waves',
+     label: 'Pop',
+     year: '1991',
+     albumArtUrl: 'assets/images/album_covers/10.png',
+     songs: [
+         { title: 'Seaside stroll', duration: '3:02' },
+         { title: 'Footprints in the sand', duration: '4:01' },
+         { title: 'Sand dollar', duration: '2:55'},
+         { title: 'One more day', duration: '3:32' },
+         { title: 'Sound of waves', duration: '4:08'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,13 +58,13 @@
      return template;
  };
 
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -67,4 +83,13 @@
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+     var albums = [albumMarconi, albumWaves, albumPicasso];
+     var i = 0;
+     albumImage.addEventListener("click", function(event) {
+       setCurrentAlbum(albums[i]); i++;
+       if (i == albums.length) {
+         i=0;
+       }
+     });
  };
