@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 var setSong = function(songNumber) {
   currentlyPlayingSongNumber = parseInt(songNumber);
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
@@ -9,7 +7,6 @@ var getSongNumberCell = function(number) {
   return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
->>>>>>> assignment-32-jquery-next-and-previous-buttons
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
