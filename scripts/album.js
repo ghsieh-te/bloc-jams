@@ -22,6 +22,8 @@ var getSongNumberCell = function(number) {
   return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
+var $mainControlPlayPause = $('.main-controls .play-pause');
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -55,12 +57,14 @@ var createSongRow = function(songNumber, songName, songLength) {
        		currentlyPlayingSongNumber = null;
           currentSongFromAlbum = null;*/
           if(currentSoundFile.isPaused()) {
-            $(this).html(playButtonTemplate);
-            $('.main-controls .play-pause').html(playerBarPauseButton);
+            $(this).html(pauseButtonTemplate);
+            /*$('.main-controls .play-pause').html(playerBarPauseButton);*/
+            $mainControlPlayPause.html(playerBarPauseButton)
             currentSoundFile.play();
           } else {
             $(this).html(playButtonTemplate);
-            $('.main-controls .play-pause').html(playerBarPlayButton);
+            /*$('.main-controls .play-pause').html(playerBarPlayButton);*/
+            $mainControlPlayPause.html(playerBarPlayButton)
             currentSoundFile.pause();
           }
        }
@@ -173,7 +177,8 @@ var nextSong = function() {
 
     updatePlayerBarSong();
 
-    $('.main-controls .play-pause').html(playerBarPauseButton);
+    /*$('.main-controls .play-pause').html(playerBarPauseButton);*/
+    $mainControlPlayPause.html(playerBarPauseButton)
 
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
@@ -236,7 +241,8 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
-    $('.main-controls .play-pause').html(playerBarPauseButton);
+    /*$('.main-controls .play-pause').html(playerBarPauseButton);*/
+    $mainControlPlayPause.html(playerBarPlayButton)
 };
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
@@ -255,11 +261,35 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
+var togglePlayFromPlayerBar = function() {
+  var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+  //if song is paused and play button is clicked in the player bar
+  if(currentSoundFile.isPaused()) {
+    $(this).html(playerBarPauseButton);
+    currentSoundFile.play();
+    currentlyPlayingCell.html(pauseButtonTemplate);
+
+
+  //change song number cell from a play button to a pause button
+  //change html of the player bar's button to a pause button
+  //play song
+} else {
+    $(this).html(playerBarPlayButton);
+    currentSoundFile.pause();
+    currentlyPlayingCell.html(playButtonTemplate);
+
+  //if song is playing and pause button is clicked
+  //change song number cell from pause button to a play button
+  //change html of player bar's pause button to a play buttons
+  //pause the song
+  }
+};
 /*window.onload = function() {*/
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     $mainControlPlayPause.click(togglePlayFromPlayerBar);
 
      /*songListContainer.addEventListener('mouseover', function(event) {
        if (event.target.parentElement.className === 'album-view-song-item') {
