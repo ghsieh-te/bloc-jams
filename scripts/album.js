@@ -116,8 +116,9 @@ var nextSong = function() {
    //previous song number
    var lastSongNumber = currentlyPlayingSongNumber;
    //set a new current song
-   currentlyPlayingSongNumber = currentSongIndex + 1;
-   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+   /*currentlyPlayingSongNumber = currentSongIndex + 1;
+   currentSongFromAlbum = currentAlbum.songs[currentSongIndex];*/
+   setSong(currentSongIndex + 1);
    //update player bar to show new song
    updatePlayerBarSong();
    //update html of previous song's .song-item-number element with a songNumber
@@ -139,8 +140,9 @@ var nextSong = function() {
 
     var lastSongNumber = currentlyPlayingSongNumber;
 
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    /*currentlyPlayingSongNumber = currentSongIndex + 1;
+    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];*/
+    setSong(currentSongIndex + 1);
 
     updatePlayerBarSong();
 
