@@ -418,7 +418,7 @@ $(document).ready(function() {
 
      var albums = [albumMarconi, albumWaves, albumPicasso];
      var i = 0;
-     albumImage.addEventListener("click", function(event) {
+     $albumImage.addEventListener("click", function(event) {
        setCurrentAlbum(albums[i]); i++;
        if (i == albums.length) {
          i=0;
